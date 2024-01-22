@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <title>My Blog</title>
+  </head>
+  <body>
+    <h1>Welcome to My Blog</h1>
+    <h2>blog posts list:</h2>
+    <table id="myTable">
+      <tr><td>timestamp</td><td>blog</td></tr>
+      {% for i in page_list %}
+      <tr><td>{{ i.createtime }}</td><td>{{ i.content }}</td></tr>
+      {% endfor %}
+    </table>
+
+    <h2>submit new blog:</h2>
+    <form id="myForm" method="post">
+        <textarea type="text" name="blogcontent" placeholder="Enter your blog"></textarea><br>
+        <button type="submit" name="submitButton">Submit</button>
+    </form>
+    <script>
+        // Get the form and input element references
+        const form = document.getElementById('myForm');
+    
+        // Add an event listener to the form submit event
+        form.addEventListener('submit', function(event) {
+          event.preventDefault(); // Prevent default form submission behavior
+
+          // send POST request to /api/submit 
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', '/api/submit', true);
+          xhr.send(new FormData(form))
+          
+          // Handle the response
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+              if (xhr.status === 200) {
+                //refresh the home page to get the latest blog items
+                window.location.reload();
+              }
+            }
+          }
+        });
+      </script>
+  </body>
+</html>
