@@ -10,19 +10,20 @@ It only includes 2 files with dozens of lines of code:
 
 # How does it work?
 It is for practising below technologies:
-1. Python Flask: the lightweight Python web application framework, for controller implementation and template rendering
-2. SQLAlchemy: ORM to SQLite db
-3. HTML & Javascript: submit request with form data to backend
+* `Python Flask`: the lightweight Python web application framework, for controller implementation and template rendering
+* `SQLAlchemy`: ORM to SQLite db
+* `HTML & Javascript`: submit request with form data to backend
 
 and it is super simple to be deployed in your system:
-1. clone the Git project
-2. create SQLite db objects before run the system
+1. Clone the Git project
+2. Create SQLite db objects before run the system. It will create a subfolder with name 'instance' and a .db file.
 ```jsonc
 from blog import app, db
 with app.app_context():
     db.create_all()
 ```
-3. run the system by the command:
+
+3. Run the system by the command:
 ```jsonc
 python3 blog.py
 ```
